@@ -69,3 +69,14 @@
       (.fillRect g2d coord 0 100 50))
     (ImageIO/write bi "PNG" (io/as-file dest-file))
     dest-file))
+
+(defn rgb->hex
+  "Convert decimal RGB triples to hex."
+  [rgbs]
+  (reduce #(str % (format "%02X" (int %2))) "" rgbs))
+
+(defn hex->rgb
+  [hex]
+  (map
+    (fn [[x y]] (Integer/parseInt (str x y) 16))
+    (partition 2 hex)))
